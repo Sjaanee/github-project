@@ -1,4 +1,4 @@
-export interface Member {
+export interface IMember {
   avatar_url: string
   events_url: string
   followers_url: string

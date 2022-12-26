@@ -1,35 +1,33 @@
-import { useEffect, useState } from "react";
-import { Button, Stack } from "react-bootstrap";
 import axios from "axios";
-import { getMembersAPI, Member } from "../../services/member";
+import { MemberCard } from "../../components/MemberCard";
+import { IMember } from "../../interfaces/IMembers";
 
-interface APIResults<T = any> {
-  value?: T
+export const getServerSideProps = async () => {
+  let url = "https://api.github.com/orgs/angular/public_members";
+
+  const { data } = await axios.get(url);
+
+  return {
+    props: {
+      members: data || [],
+    },
+  };
+};
+
+interface IProps {
+  members: []
 }
 
-export default function Members() {
-  const [members, setMembers] = useState<Member[]>()
-
-  const getMembers = async (): Promise<void> => {
-    try {
-      const result: APIResults<Member[]> = await getMembersAPI()
-
-      console.log(result)
-
-      setMembers(result.value)
-    } catch (e) {
-      console.error(e)
-    }
-  } 
-
-  useEffect(() => {
-    getMembers().then().catch(console.error)
-  }, [])
+export default function Members(props: IProps) {
+  const members = props.members
 
   return (
-  <div className="container">
-    {/* {members && (<>
-      {members.map(
-    </>)} */}
-  </div>)
+    <section className="bg-black-500">
+      <div className="shadow py-10 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5">
+          {members && (<>
+            {members.map((el: IMember, i: number) => (<button key={i}><MemberCard member={el}/></button>))}
+          </>)}
+      </div>
+    </section>
+    )
 }
