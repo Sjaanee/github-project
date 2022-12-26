@@ -10,7 +10,7 @@ export function MemberCard({ member }: MemberCardProps) {
 
   return (
     <Link href={`/member/${member.login}`} key={member.login}>
-    <div className="max-w-[305px] mx-auto overflow-hidden rounded-lg border transition-all shadow-nftCard hover:shadow-nftCardHover z-[3]">
+    <div className="max-w-[305px] mx-auto overflow-hidden rounded-lg border transition-all z-[3]">
       <div className="w-[305px] h-[81px] bg-black-300 overflow-hidden bg-fixed">
           <div className="w-full h-full bg-black-700"></div>
       </div>
