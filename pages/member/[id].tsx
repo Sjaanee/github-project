@@ -21,6 +21,8 @@ export default function Member() {
       );
 
       setMember(data);
+
+      console.log(member)
     } catch (err) {
       console.error(err);
     }
@@ -29,14 +31,19 @@ export default function Member() {
   useEffect(() => {
     getMemberDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router]);
 
   return (
-    <div>
       <div className="flex p-5 justify-center items-center">
-        <div className="flex flex-col md:flex-row bg-slate-100 p-8 rounded-md">
-          <div className="flex flex-row md:flex-col">
-            {member && <Image src={member.avatar_url} width={60} height={60} alt="Foto do usuário" />} 
+        <div className="flex flex-col md:flex-row bg-slate-100 p-8 rounded-md gap-4">
+          <div className="flex flex-col mb-2">
+            <div className="relative flex items-center justify-center rounded-full border-[4px] shadow-lg border-white bg-center bg-contain bottom-6 max-w-[53px] max-h-[53px] bg-black-300 overflow-hidden">
+              {member && <Image src={member.avatar_url} width={60} height={60} alt="Foto do usuário" />}
+            </div>
+            <p>Total de seguidores: {member?.followers}</p>
+            <p>Total de repositórios: {member?.public_repos}</p>
+            <p>Data de início {member?.created_at}</p>
+
           </div>
 
           <div className="flex w-80 pl-5 flex-col">
@@ -44,13 +51,13 @@ export default function Member() {
             <span>{member?.bio}</span>
 
             <span className="text-xl mt-5 text-slate-700">
-              <span className="font-bold">Bio: </span>
-              <span>{member?.blog}</span>
+              {member?.blog && (<><span className="font-bold">Blog: </span>
+              <span>{member?.blog}</span></>)}
+              
+              <button className="rounded-lg border border-blue pl-2 pr-2 mt-2 lg" onClick={() => router.push('/members')}>Voltar</button>
             </span>
           </div>
-          <button className="rounded-lg border border-blue pl-2 pr-2" onClick={() => router.push('/members')}>Voltar</button>
         </div>
       </div>
-    </div>
   );
 }

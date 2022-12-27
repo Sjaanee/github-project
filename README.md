@@ -31,5 +31,5 @@ Abra [http://localhost:3000](http://localhost:3000) em seu navegador para ver o 
 
 ## TO-DO
 
-- Refatorar página de membro, excedeu o limite da API do GitHub
-- Implementação do StoryBook
+[X] Refatorar página de membro, excedeu o limite da API do GitHub
+[] Implementação do StoryBook
